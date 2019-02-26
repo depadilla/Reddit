@@ -17,19 +17,22 @@ while final_input == "no" do
 
   index = 0
   bullet = 1
+  posts_array = ["empty", ]
   posts.times do
     puts " "
-    puts "#{bullet}) " + subreddit_info["data"]["children"][index]["data"]["title"].to_s
+    posts_array << subreddit_info["data"]["children"][index]["data"]["title"].to_s          # Adds all the posts into the array.
+    puts "#{bullet}) " + posts_array[bullet].to_s
     puts " "
+
     index += 1
     bullet += 1
   end
 
-  puts "The first permalink is #{subreddit_info["data"]["children"][0]["data"]["permalink"]}"
+  # puts "The first permalink is #{subreddit_info["data"]["children"][0]["data"]["permalink"]}"
 
-  print "Choose post: "
+  print "Choose post number: "
 
-  section = gets.chomp.to_s
+  section = gets.chomp.to_i
 
   comments = HTTP.get("https://www.reddit.com/r/#{sub_reddit}/comments/aou8i7/#{section}/.json")
 
@@ -62,8 +65,8 @@ end
 
 
 
-def get_comment
-  comment = comments_info[1]["data"]["children"][index2]["data"]["permalink"]
+# def get_comment
+#   comment = comments_info[1]["data"]["children"][index2]["data"]["permalink"]
 
 
-end
+# end
